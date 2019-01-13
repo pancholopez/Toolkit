@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessHelper", "ProcessHelper\ProcessHelper.csproj", "{037541C3-A064-4749-A722-7C0E50839309}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlowProcess", "SlowProcess\SlowProcess.csproj", "{6D477E37-BC7F-4BB2-B279-FA0D5E51C060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlowProcess", "SlowProcess\SlowProcess.csproj", "{6D477E37-BC7F-4BB2-B279-FA0D5E51C060}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManagement", "FileManagement\FileManagement.csproj", "{72A4DDE4-6F23-4606-9C93-574FC4EB5E04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6D477E37-BC7F-4BB2-B279-FA0D5E51C060}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D477E37-BC7F-4BB2-B279-FA0D5E51C060}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D477E37-BC7F-4BB2-B279-FA0D5E51C060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72A4DDE4-6F23-4606-9C93-574FC4EB5E04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72A4DDE4-6F23-4606-9C93-574FC4EB5E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72A4DDE4-6F23-4606-9C93-574FC4EB5E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72A4DDE4-6F23-4606-9C93-574FC4EB5E04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
