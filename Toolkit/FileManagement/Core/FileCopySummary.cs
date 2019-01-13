@@ -13,7 +13,7 @@
             TotalBytesCopied = totalBytesCopied;
         }
 
-        public static IFileCopySummary Create(FileItem source, FileItem destination)
-            => new FileCopySummary(source.FilePath, destination.FilePath, source.SizeInBytes);
+        public static IFileCopySummary Create(FileItem source, FileItem destination, long totalBytesCopied)
+            => new FileCopySummary(source.FilePath, destination.FilePath, totalBytesCopied);
     }
 }

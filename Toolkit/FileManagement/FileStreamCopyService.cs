@@ -21,7 +21,7 @@ namespace FileManagement
                     } while (bytesRead > 0);
                 }
             }
-            return FileCopySummary.Create(source, destination);
+            return FileCopySummary.Create(source, destination, source.SizeInBytes);
         }
     }
 }
