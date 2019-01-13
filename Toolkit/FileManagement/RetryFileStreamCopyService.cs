@@ -7,14 +7,16 @@ namespace FileManagement
 {
     public class RetryFileStreamCopyService : IFileCopyService
     {
-        private async Task<int> ReadRetryAsync(FileStream input, byte[] buffer, FileStream output)
+        private async Task<int> ReadRetryAsync(Stream input, byte[] buffer, Stream output)
         {
             int totalBytesRead = 0;
             int bytesRead;
 
             do
             {
+                //this can fail, so retry
                 bytesRead = await input.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
+
                 totalBytesRead += bytesRead;
 
                 await WriteRetryAsync(output, buffer, bytesRead);
