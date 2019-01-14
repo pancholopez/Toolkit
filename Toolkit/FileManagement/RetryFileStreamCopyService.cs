@@ -1,5 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using FileManagement.Core;
 
@@ -7,32 +7,15 @@ namespace FileManagement
 {
     public class RetryFileStreamCopyService : IFileCopyService
     {
-        private static async Task<int> RetryAsync(Func<Task<int>> operation)
+        private readonly RetryFileOperations _retryOperations;
+
+        public RetryFileStreamCopyService(RetryFileOperations retryOperations)
         {
-            var retryCount = 0;
-            var retryLimit = 3;
-            while (true)
-            {
-                try
-                {
-                    return await operation();
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine(exception);
-                    retryCount++;
-                    await Task.Delay(1000);
-                }
-                finally
-                {
-                    if (retryCount > retryLimit)
-                        throw new RetryLimitException("Retry limit reached.");
-                }
-            }
+            _retryOperations = retryOperations;
         }
 
         public async Task<T> CopyAsync<T>(FileItem source, FileItem destination)
-        where T:CopySummary
+            where T : CopySummary
         {
             var buffer = new byte[32 * 1024];   //4k minimum - 128k recommended
             var input = new FileStream(source.FilePath, FileMode.Open, FileAccess.Read);
@@ -43,15 +26,9 @@ namespace FileManagement
                 int bytesRead;
                 do
                 {
-                    bytesRead = await RetryAsync(async () => 
-                        await input.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false));
-
-                    var bytesToWrite = bytesRead;
-                    totalBytesWritten += await RetryAsync(async () =>
-                    {
-                        await output.WriteAsync(buffer, 0, bytesToWrite).ConfigureAwait(false);
-                        return bytesToWrite;
-                    });
+                    bytesRead = await _retryOperations.ReadAsync(input, buffer).ConfigureAwait(false);
+                    await _retryOperations.WriteAsync(output, buffer, bytesRead).ConfigureAwait(false);
+                    totalBytesWritten += bytesRead;
                 } while (bytesRead > 0);
             }
             finally
