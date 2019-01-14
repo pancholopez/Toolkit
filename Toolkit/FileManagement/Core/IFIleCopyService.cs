@@ -4,6 +4,6 @@ namespace FileManagement.Core
 {
     public interface IFileCopyService
     {
-        Task<IFileCopySummary> CopyAsync(FileItem source, FileItem destination);
+        Task<T> CopyAsync<T>(FileItem source, FileItem destination) where T : CopySummary;
     }
 }

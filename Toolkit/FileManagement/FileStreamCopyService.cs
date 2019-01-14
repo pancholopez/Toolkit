@@ -6,7 +6,7 @@ namespace FileManagement
 {
     public class FileStreamCopyService : IFileCopyService
     {
-        public async Task<IFileCopySummary> CopyAsync(FileItem source, FileItem destination)
+        public async Task<T> CopyAsync<T>(FileItem source, FileItem destination) where T : CopySummary
         {
             using (var input = new FileStream(source.FilePath, FileMode.Open, FileAccess.Read))
             {
@@ -21,7 +21,7 @@ namespace FileManagement
                     } while (bytesRead > 0);
                 }
             }
-            return FileCopySummary.Create(source, destination, source.SizeInBytes);
+            return (T)CopySummary.Create(source, destination, source.SizeInBytes);
         }
     }
 }

@@ -31,7 +31,8 @@ namespace FileManagement
             }
         }
 
-        public async Task<IFileCopySummary> CopyAsync(FileItem source, FileItem destination)
+        public async Task<T> CopyAsync<T>(FileItem source, FileItem destination)
+        where T:CopySummary
         {
             var buffer = new byte[32 * 1024];   //4k minimum - 128k recommended
             var input = new FileStream(source.FilePath, FileMode.Open, FileAccess.Read);
@@ -58,7 +59,7 @@ namespace FileManagement
                 input.Close();
                 output.Close();
             }
-            return FileCopySummary.Create(source, destination, totalBytesWritten);
+            return (T)CopySummary.Create(source, destination, totalBytesWritten);
         }
     }
 }
