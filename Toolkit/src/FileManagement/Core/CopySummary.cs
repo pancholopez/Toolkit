@@ -1,4 +1,6 @@
-﻿namespace FileManagement.Core
+﻿using System;
+
+namespace FileManagement.Core
 {
     public class CopySummary
     {
@@ -14,6 +16,11 @@
         }
 
         public static CopySummary Create(FileItem source, FileItem destination, long totalBytesCopied)
-            => new CopySummary(source.FilePath, destination.FilePath, totalBytesCopied);
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (destination == null) throw new ArgumentNullException(nameof(destination));
+            if (totalBytesCopied < 0) throw new ArgumentOutOfRangeException(nameof(totalBytesCopied));
+            return new CopySummary(source.FilePath, destination.FilePath, totalBytesCopied);
+        }
     }
 }

@@ -28,6 +28,6 @@ namespace FileManagement.Core
                 fileInfo.Directory != null && fileInfo.Directory.Exists, fileInfo.Length);
         }
 
-        public static FileItem Null => Create(Path.GetRandomFileName());
+        public static FileItem Existing => new FileItem(Path.GetRandomFileName(), true, true, 100);
     }
 }
