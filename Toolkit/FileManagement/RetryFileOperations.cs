@@ -16,19 +16,19 @@ namespace FileManagement
 
         public async Task<int> ReadAsync(Stream input, byte[] buffer)
         {
-            return await RetryLogic(() => input.ReadAsync(buffer, 0, buffer.Length));
+            return await Retry(() => input.ReadAsync(buffer, 0, buffer.Length));
         }
 
         public async Task WriteAsync(FileStream output, byte[] buffer, int count)
         {
-            await RetryLogic(async () =>
+            await Retry(async () =>
             {
                 await output.WriteAsync(buffer, 0, count);
                 return await Task.FromResult(count);
             });
         }
 
-        private async Task<int> RetryLogic(Func<Task<int>> operation)
+        private async Task<int> Retry(Func<Task<int>> operation)
         {
             var retryCount = 0;
             while (true)
