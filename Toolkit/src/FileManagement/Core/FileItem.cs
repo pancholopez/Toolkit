@@ -24,10 +24,14 @@ namespace FileManagement.Core
             if (!Path.IsPathRooted(filePath)) throw new ArgumentException("Invalid file path", nameof(filePath));
 
             var fileInfo = new FileInfo(filePath);
-            return new FileItem(filePath, fileInfo.Exists,
-                fileInfo.Directory != null && fileInfo.Directory.Exists, fileInfo.Length);
+            return new FileItem(
+                filePath, 
+                fileInfo.Exists,
+                fileInfo.Directory != null && fileInfo.Directory.Exists, 
+                fileInfo.Exists ? fileInfo.Length : 0);
         }
 
+        //todo: check if move this to a helper class
         public static FileItem Existing => new FileItem(Path.GetRandomFileName(), true, true, 100);
     }
 }
