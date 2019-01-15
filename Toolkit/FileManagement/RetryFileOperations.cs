@@ -7,6 +7,13 @@ namespace FileManagement
 {
     public sealed class RetryFileOperations : IRetryFileOperations
     {
+        private readonly RetrySettings _settings;
+
+        public RetryFileOperations(RetrySettings settings)
+        {
+            _settings = settings;
+        }
+
         public async Task<int> ReadAsync(Stream input, byte[] buffer)
         {
             return await RetryLogic(() => input.ReadAsync(buffer, 0, buffer.Length));
@@ -24,7 +31,6 @@ namespace FileManagement
         private async Task<int> RetryLogic(Func<Task<int>> operation)
         {
             var retryCount = 0;
-            var retryLimit = 3;
             while (true)
             {
                 try
@@ -35,11 +41,11 @@ namespace FileManagement
                 {
                     Console.WriteLine(exception);
                     retryCount++;
-                    await Task.Delay(1000);
+                    await Task.Delay(_settings.ElapsedMilliseconds);
                 }
                 finally
                 {
-                    if (retryCount > retryLimit)
+                    if (retryCount > _settings.Limit)
                         throw new RetryLimitException("Retry limit reached.");
                 }
             }

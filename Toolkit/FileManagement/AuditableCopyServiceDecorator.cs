@@ -4,11 +4,11 @@ using FileManagement.Core;
 
 namespace FileManagement
 {
-    public class AuditableFileCopyService : IFileCopyService
+    public class AuditableCopyServiceDecorator : IFileCopyService
     {
         private readonly IFileCopyService _fileCopyService;
 
-        public AuditableFileCopyService(IFileCopyService fileCopyService)
+        public AuditableCopyServiceDecorator(IFileCopyService fileCopyService)
         {
             _fileCopyService = fileCopyService;
         }

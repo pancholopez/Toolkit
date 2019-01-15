@@ -5,11 +5,11 @@ using FileManagement.Core;
 
 namespace FileManagement
 {
-    public class RetryFileStreamCopyService : IFileCopyService
+    public class RetryStreamCopyService : IFileCopyService
     {
         private readonly RetryFileOperations _retryOperations;
 
-        public RetryFileStreamCopyService(RetryFileOperations retryOperations)
+        public RetryStreamCopyService(RetryFileOperations retryOperations)
         {
             _retryOperations = retryOperations;
         }

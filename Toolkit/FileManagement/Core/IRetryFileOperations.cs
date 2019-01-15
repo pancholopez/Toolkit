@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace FileManagement
+namespace FileManagement.Core
 {
     public interface IRetryFileOperations
     {
