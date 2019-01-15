@@ -7,7 +7,7 @@ namespace FileManagement.Core
     {
         public abstract Task<T> CopyAsync<T>(FileItem source, FileItem destination) where T : CopySummary;
 
-        public void Delete(FileItem file)
+        public virtual void Delete(FileItem file)
         {
             File.Delete(file.FilePath);
         }

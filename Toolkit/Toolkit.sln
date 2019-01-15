@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessHelper", "ProcessHel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlowProcess", "SlowProcess\SlowProcess.csproj", "{6D477E37-BC7F-4BB2-B279-FA0D5E51C060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManagement", "FileManagement\FileManagement.csproj", "{72A4DDE4-6F23-4606-9C93-574FC4EB5E04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileManagement", "FileManagement\FileManagement.csproj", "{72A4DDE4-6F23-4606-9C93-574FC4EB5E04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D2E83365-E7D2-4ED6-8653-782CDC4634EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{26DF58F0-CE3E-44DE-9383-4D2DDB285407}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +34,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{037541C3-A064-4749-A722-7C0E50839309} = {26DF58F0-CE3E-44DE-9383-4D2DDB285407}
+		{6D477E37-BC7F-4BB2-B279-FA0D5E51C060} = {26DF58F0-CE3E-44DE-9383-4D2DDB285407}
+		{72A4DDE4-6F23-4606-9C93-574FC4EB5E04} = {26DF58F0-CE3E-44DE-9383-4D2DDB285407}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F26C764-DE4F-4277-A341-FD1D90B74E01}
