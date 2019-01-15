@@ -14,7 +14,7 @@ namespace FileManagement.Core
             BytesPerSecond = (long) (summary.TotalBytesCopied / elapsed?.TotalSeconds ?? 0);
         }
 
-        public static CopySummary Create(CopySummary summary, TimeSpan? elapsed)
+        public static CopyStats Create(CopySummary summary, TimeSpan? elapsed)
             => new CopyStats(summary, elapsed);
     }
 }

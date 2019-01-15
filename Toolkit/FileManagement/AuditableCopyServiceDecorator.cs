@@ -18,7 +18,7 @@ namespace FileManagement
             var stopwatch = Stopwatch.StartNew();
             var summary = await _fileCopyService.CopyAsync<T>(source, destination);
             stopwatch.Stop();
-            return (T)CopyStats.Create(summary, stopwatch.Elapsed);
+            return CopyStats.Create(summary, stopwatch.Elapsed) as T;
         }
     }
 }
