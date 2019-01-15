@@ -4,9 +4,9 @@ using FileManagement.Core;
 
 namespace FileManagement
 {
-    public class Win32FileCopyService : IFileCopyService
+    public class Win32FileCopyService : FileCopyServiceBase
     {
-        public async Task<T> CopyAsync<T>(FileItem source, FileItem destination) where T : CopySummary
+        public override async Task<T> CopyAsync<T>(FileItem source, FileItem destination)
         {
             File.Copy(source.FilePath, destination.FilePath);
             await Task.CompletedTask;

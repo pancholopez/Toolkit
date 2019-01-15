@@ -5,7 +5,7 @@ using FileManagement.Core;
 
 namespace FileManagement
 {
-    public class RetryStreamCopyService : IFileCopyService
+    public class RetryStreamCopyService : FileCopyServiceBase
     {
         private readonly RetryFileOperations _retryOperations;
 
@@ -14,8 +14,7 @@ namespace FileManagement
             _retryOperations = retryOperations;
         }
 
-        public async Task<T> CopyAsync<T>(FileItem source, FileItem destination)
-            where T : CopySummary
+        public override async Task<T> CopyAsync<T>(FileItem source, FileItem destination)
         {
             var buffer = new byte[32 * 1024];   //4k minimum - 128k recommended
             var input = new FileStream(source.FilePath, FileMode.Open, FileAccess.Read);
