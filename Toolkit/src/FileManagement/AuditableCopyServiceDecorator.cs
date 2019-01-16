@@ -4,7 +4,7 @@ using FileManagement.Core;
 
 namespace FileManagement
 {
-    public class AuditableCopyServiceDecorator : FileCopyServiceBase
+    public class AuditableCopyServiceDecorator : IFileCopyService
     {
         private readonly IFileCopyService _fileCopyService;
 
@@ -13,7 +13,7 @@ namespace FileManagement
             _fileCopyService = fileCopyService;
         }
 
-        public override async Task<T> CopyAsync<T>(FileItem source, FileItem destination)
+        public async Task<T> CopyAsync<T>(FileItem source, FileItem destination) where T : CopySummary
         {
             var stopwatch = Stopwatch.StartNew();
             var summary = await _fileCopyService.CopyAsync<T>(source, destination);

@@ -4,9 +4,9 @@ using FileManagement.Core;
 
 namespace FileManagement
 {
-    public class StreamCopyService : FileCopyServiceBase
+    public class StreamCopyService : IFileCopyService
     {
-        public override async Task<T> CopyAsync<T>(FileItem source, FileItem destination)
+        public async Task<T> CopyAsync<T>(FileItem source, FileItem destination) where T : CopySummary
         {
             using (var input = new FileStream(source.FilePath, FileMode.Open, FileAccess.Read))
             {

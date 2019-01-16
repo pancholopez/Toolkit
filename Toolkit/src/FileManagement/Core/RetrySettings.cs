@@ -9,8 +9,10 @@ namespace FileManagement.Core
 
         public RetrySettings(int limit, int elapsedMilliseconds)
         {
-            if (limit < 0) throw new ArgumentException("retry limit should not be less than zero.");
-            if(elapsedMilliseconds < 0) throw new ArgumentException("elapsed milliseconds should not be less than zero.");
+            if (limit < 0)
+                throw new ArgumentOutOfRangeException(nameof(limit), "retry limit should not be less than zero.");
+            if (elapsedMilliseconds < 0)
+                throw new ArgumentOutOfRangeException(nameof(elapsedMilliseconds), "elapsed milliseconds should not be less than zero.");
 
             Limit = limit;
             ElapsedMilliseconds = elapsedMilliseconds;

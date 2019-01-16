@@ -15,6 +15,9 @@ namespace FileManagement.Core
         }
 
         public static CopyStats Create(CopySummary summary, TimeSpan? elapsed)
-            => new CopyStats(summary, elapsed);
+        {
+            if(summary == null) throw new ArgumentNullException(nameof(summary));
+            return new CopyStats(summary, elapsed);
+        }
     }
 }
