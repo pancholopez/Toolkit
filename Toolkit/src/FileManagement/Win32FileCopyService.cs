@@ -4,7 +4,7 @@ using FileManagement.Core;
 
 namespace FileManagement
 {
-    public class Win32FileCopyService : IFileCopyService
+    public class Win32FileCopyService //: IFileCopyService
     {
         public async Task<T> CopyAsync<T>(FileItem source, FileItem destination) where T : CopySummary
         {
