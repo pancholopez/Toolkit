@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FileManagement.Core
 {
     public interface IFileCopyService
     {
-        Task<T> CopyAsync<T>(FileItem source, FileItem destination, IProgress<int> progress) 
-            where T : CopySummary;
+        Task CopyAsync(FileItem source, FileItem destination, 
+            IProgress<int> progress, CancellationToken cancellationToken);
     }
 }

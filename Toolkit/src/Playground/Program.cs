@@ -37,13 +37,25 @@ namespace Playground
             }
 
             var progressIndicator = new Progress<int>(PrintProgress);
+            var cst = new CancellationTokenSource();
+
             var stopwatch = Stopwatch.StartNew();
 
 
-            await service.CopyAsync<CopySummary>(source, destination, progressIndicator);
-            stopwatch.Stop();
+            try
+            {
+                await service.CopyAsync<CopySummary>(source, destination, progressIndicator, cst.Token);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            finally
+            {
+                stopwatch.Stop();
+            }
 
-            await Task.Delay(100);
+            await Task.Delay(1000);
             Console.WriteLine($"Elapsed Milliseconds: {stopwatch.ElapsedMilliseconds}");
         }
     }
