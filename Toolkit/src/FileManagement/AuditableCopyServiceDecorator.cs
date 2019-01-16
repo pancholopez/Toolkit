@@ -17,9 +17,9 @@ namespace FileManagement
         public async Task<T> CopyAsync<T>(FileItem source, FileItem destination) where T : CopySummary
         {
             var stopwatch = Stopwatch.StartNew();
-            var summary = await _fileCopyService.CopyAsync<T>(source, destination, null, CancellationToken.None);
+            await _fileCopyService.CopyAsync(source, destination, null, CancellationToken.None);
             stopwatch.Stop();
-            return CopyStats.Create(summary, stopwatch.Elapsed) as T;
+            return CopyStats.Create(null, stopwatch.Elapsed) as T;
         }
     }
 }

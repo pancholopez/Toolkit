@@ -20,31 +20,36 @@ namespace Playground
 
             MainAsync().Wait();
 
-            Console.WriteLine("program ended.");
+            Console.Write("program ended.");
             Console.ReadKey();
         }
 
         private static async Task MainAsync()
         {
-            IFileCopyService service = new StreamCopyService();
+            var settings = new RetrySettings(3, 2000);
+            var retry = new RetryService(settings);
+            IFileCopyService service = new StreamCopyService(retry);
             var source = FileItem.Create(SourceFilePath);
             var destination = FileItem.Create(DestinationFilePath);
 
-            void PrintProgress(int bytesWritten)
+            
+
+            void PrintProgress(long bytesWritten)
             {
+                var remainingBytes = source.SizeInBytes - bytesWritten;
                 Console.WriteLine(
-                    $"Total: {source.SizeInBytes} - Written: {bytesWritten} - Remaining: {source.SizeInBytes - bytesWritten}");
+                    $"Total: {source.SizeInBytes} - Written: {bytesWritten} - Remaining: {remainingBytes}");
             }
 
-            var progressIndicator = new Progress<int>(PrintProgress);
+            var progressIndicator = new Progress<long>(PrintProgress);
             var cst = new CancellationTokenSource();
 
             var stopwatch = Stopwatch.StartNew();
 
-
             try
             {
-                await service.CopyAsync<CopySummary>(source, destination, progressIndicator, cst.Token);
+                await service.CopyAsync(source, destination, progressIndicator, cst.Token)
+                    .ContinueWith(task => Console.WriteLine("Copy file completed!"), cst.Token);
             }
             catch (Exception exception)
             {
@@ -55,7 +60,6 @@ namespace Playground
                 stopwatch.Stop();
             }
 
-            await Task.Delay(1000);
             Console.WriteLine($"Elapsed Milliseconds: {stopwatch.ElapsedMilliseconds}");
         }
     }

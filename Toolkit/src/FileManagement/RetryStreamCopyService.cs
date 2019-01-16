@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 using FileManagement.Core;
 
@@ -7,11 +8,11 @@ namespace FileManagement
 {
     public class RetryStreamCopyService //: IFileCopyService
     {
-        private readonly RetryFileOperations _retryOperations;
+        private readonly RetryService _retryService;
 
-        public RetryStreamCopyService(RetryFileOperations retryOperations)
+        public RetryStreamCopyService(RetryService retryService)
         {
-            _retryOperations = retryOperations;
+            _retryService = retryService;
         }
 
         public async Task<T> CopyAsync<T>(FileItem source, FileItem destination) where T : CopySummary
@@ -25,8 +26,8 @@ namespace FileManagement
                 int bytesRead;
                 do
                 {
-                    bytesRead = await _retryOperations.ReadAsync(input, buffer).ConfigureAwait(false);
-                    await _retryOperations.WriteAsync(output, buffer, bytesRead).ConfigureAwait(false);
+                    bytesRead = await _retryService.ReadAsync(input, buffer, CancellationToken.None).ConfigureAwait(false);
+                    await _retryService.WriteAsync(output, buffer, bytesRead, CancellationToken.None).ConfigureAwait(false);
                     totalBytesWritten += bytesRead;
                 } while (bytesRead > 0);
             }

@@ -7,6 +7,6 @@ namespace FileManagement.Core
     public interface IFileCopyService
     {
         Task CopyAsync(FileItem source, FileItem destination, 
-            IProgress<int> progress, CancellationToken cancellationToken);
+            IProgress<long> progress, CancellationToken cancellationToken);
     }
 }
