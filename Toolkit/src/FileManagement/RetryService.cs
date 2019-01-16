@@ -39,9 +39,12 @@ namespace FileManagement
                     cancellationToken.ThrowIfCancellationRequested();
                     return await operation();
                 }
-                catch (Exception exception)
+                catch (TaskCanceledException)   //propagate if task was canceled
                 {
-                    Console.WriteLine(exception);
+                    throw;
+                }
+                catch (Exception)   //any other exception we just retry
+                {
                     retryCount++;
                     await Task.Delay(_settings.ElapsedMilliseconds, cancellationToken);
                 }

@@ -10,7 +10,7 @@ namespace Playground
 {
     class Program
     {
-        private const string SourceFilePath = @"C:\Users\francisco.lopez2\Desktop\deleteme\test.files\dummy.txt";
+        private const string SourceFilePath = @"C:\Users\francisco.lopez2\Desktop\deleteme\test.files\03gbFile.tmp";
         private const string DestinationFilePath = @"C:\Users\francisco.lopez2\Desktop\deleteme\test.files\dummy.copy";
 
         static void Main(string[] args)
@@ -42,7 +42,7 @@ namespace Playground
             }
 
             var progressIndicator = new Progress<long>(PrintProgress);
-            var cst = new CancellationTokenSource();
+            var cst = new CancellationTokenSource(5000);
 
             var stopwatch = Stopwatch.StartNew();
 
