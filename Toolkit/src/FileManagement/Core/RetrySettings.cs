@@ -17,5 +17,7 @@ namespace FileManagement.Core
             Limit = limit;
             ElapsedMilliseconds = elapsedMilliseconds;
         }
+
+        public static RetrySettings Default=>new RetrySettings(3,2000);
     }
 }

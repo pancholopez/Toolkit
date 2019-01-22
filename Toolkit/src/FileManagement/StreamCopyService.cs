@@ -15,7 +15,7 @@ namespace FileManagement
             _retry = retry;
         }
 
-        public async Task CopyAsync(FileItem source, FileItem destination, 
+        public async Task<long> CopyAsync(FileItem source, FileItem destination,
             IProgress<long> progress, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();   //exit before reading
@@ -33,6 +33,7 @@ namespace FileManagement
                     cancellationToken.ThrowIfCancellationRequested(); //exit after writing and before reading next chunk
                 }
             }
+            return totalBytesWritten;
         }
     }
 }
