@@ -15,6 +15,11 @@ namespace FileManagement
             _settings = settings;
         }
 
+        public async Task Write<T>(Task<T> operation)
+        {
+
+        }
+
         public async Task<int> ReadAsync(Stream input, byte[] buffer, CancellationToken cancellationToken)
         {
             return await Retry(() => input.ReadAsync(buffer, 0, buffer.Length, cancellationToken), cancellationToken);
@@ -43,15 +48,11 @@ namespace FileManagement
                 {
                     throw;
                 }
-                catch (Exception)   //any other exception we just retry
+                catch (Exception exception)   //any other exception we just retry
                 {
-                    retryCount++;
+                    if (retryCount++ > _settings.Limit)
+                        throw new RetryException("Retry operation limit reached.", exception);   //throw if we reached the retry limit
                     await Task.Delay(_settings.ElapsedMilliseconds, cancellationToken);
-                }
-                finally
-                {
-                    if (retryCount > _settings.Limit)
-                        throw new RetryLimitException("Retry limit reached.");
                 }
             }
         }
