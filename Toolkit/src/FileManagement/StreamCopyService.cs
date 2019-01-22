@@ -6,6 +6,7 @@ using FileManagement.Core;
 
 namespace FileManagement
 {
+    /// <inheritdoc />
     public class StreamCopyService : IFileCopyService
     {
         private readonly IRetryService _retry;
@@ -15,7 +16,8 @@ namespace FileManagement
             _retry = retry;
         }
 
-        public async Task CopyAsync(FileItem source, FileItem destination, 
+        /// <inheritdoc />
+        public async Task<long> CopyAsync(FileItem source, FileItem destination, 
             IProgress<long> progress, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();   //exit before reading
@@ -33,6 +35,7 @@ namespace FileManagement
                     cancellationToken.ThrowIfCancellationRequested(); //exit after writing and before reading next chunk
                 }
             }
+            return totalBytesWritten;
         }
     }
 }
