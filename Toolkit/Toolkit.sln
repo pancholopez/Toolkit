@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessHelper", "src\Proces
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SlowProcess", "src\SlowProcess\SlowProcess.csproj", "{D2F47173-AA68-4990-B05D-81F5653481F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "src\Playground\Playground.csproj", "{59D3EF94-EBAD-44E8-AD33-A06FA6303292}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playground", "src\Playground\Playground.csproj", "{59D3EF94-EBAD-44E8-AD33-A06FA6303292}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OauthHelper", "src\OauthHelper\OauthHelper.csproj", "{125B2181-792D-4152-B594-1C16525C29F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{59D3EF94-EBAD-44E8-AD33-A06FA6303292}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59D3EF94-EBAD-44E8-AD33-A06FA6303292}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59D3EF94-EBAD-44E8-AD33-A06FA6303292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{125B2181-792D-4152-B594-1C16525C29F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{125B2181-792D-4152-B594-1C16525C29F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{125B2181-792D-4152-B594-1C16525C29F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{125B2181-792D-4152-B594-1C16525C29F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{B005FBF6-A566-4ECC-9FF9-30D0F5A798C7} = {26DF58F0-CE3E-44DE-9383-4D2DDB285407}
 		{D2F47173-AA68-4990-B05D-81F5653481F7} = {26DF58F0-CE3E-44DE-9383-4D2DDB285407}
 		{59D3EF94-EBAD-44E8-AD33-A06FA6303292} = {26DF58F0-CE3E-44DE-9383-4D2DDB285407}
+		{125B2181-792D-4152-B594-1C16525C29F1} = {26DF58F0-CE3E-44DE-9383-4D2DDB285407}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F26C764-DE4F-4277-A341-FD1D90B74E01}
